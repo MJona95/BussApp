@@ -1,13 +1,27 @@
 import { StyleSheet, View, Text } from 'react-native';
 
-import CardModalIsec from './subcomponents/CardModalIsec';
+import { useState, useEffect } from 'react';
+import { useFetchData } from '../hooks/useFetchData';
 
-import { dataL } from './dataL';
+import CardModalIsec from './subcomponents/CardModalIsec';
 
 export default function CardModalI() {
 
-  const busesEM = dataL[2];
-  const busesOM = dataL[3];
+  const [expressbus, setExpresBus] = useState([]);
+  const [regularbus, setRegularBus] = useState([]);
+  
+  const data = useFetchData('expressbus')
+  const data2 = useFetchData('regularbus')
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setExpresBus(data); // Actualizamos el estado solo cuando los datos están disponibles
+    }
+
+    if (data2 && data2.length > 0) {
+      setRegularBus(data2); // Actualizamos el estado solo cuando los datos están disponibles
+    }
+  }, [data, data2]);
   
   return (
     <View style={styles.container} >
@@ -15,13 +29,13 @@ export default function CardModalI() {
         <Text style={styles.titleinfo}>Expresos a Managua - Esteli</Text>
       <View style={styles.informacion} >
          {
-            busesEM.map((info, index) => <CardModalIsec key={index} iconb={info.iconb} busnombre={info.busnombre} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
+            expressbus.map((info, index) => <CardModalIsec key={index} iconb={info.iconb} busnombre={info.busnombre} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
          }
       </View>
       <Text style={styles.titleinfo}>Ordinarios a Managua</Text>
       <View style={styles.informaciond} >
          {
-            busesOM.map((info, index) => <CardModalIsec key={index} iconb={info.iconb} busnombre={info.busnombre} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
+            regularbus.map((info, index) => <CardModalIsec key={index} iconb={info.iconb} busnombre={info.busnombre} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
          }
       </View>
     </View>

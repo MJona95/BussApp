@@ -1,6 +1,6 @@
-export const dataL = [
+export const dataD = {
   
-  infoCard = [
+  indexcards: [
     {
       iconh: "bus-alt",
       title: "Intinerario",
@@ -19,15 +19,15 @@ export const dataL = [
     },
     {
       iconh: "users",
-      title: "Nosotros",
-      texto: "En la pestaña nosotros podra obtener detalles de nuestra empresa de desarrollo web DevTools y nuestros proximos proyectos",
-      spam: "Si necesita mas informacion visite la pestaña nosotros",
+      title: "Trasporte Privado",
+      texto: "Da click aqui para ver mas informacion sobre servicios de transportes privados ",
+      spam: "Estolfkds;aljf;aklsdjf",
       iconf: "info-circle",
       modal: "modal3"
     },
   ],
 
-  estaciones = [
+  stations: [
   {
       id: "1",
       title: "Somoto",
@@ -143,7 +143,7 @@ export const dataL = [
   },
 ],
 
-  busesEM = [
+  busesEM: [
     {
       iconb: "bus-alt",
       busnombre: "Karina",
@@ -200,7 +200,7 @@ export const dataL = [
     },
 ],
 
-  busesOM = [
+  busesOM: [
     {
       iconb: "bus-alt",
       busnombre: "Gonzalez",
@@ -229,4 +229,4 @@ export const dataL = [
         coloricon: "#CBBDF0"
     },
 ]
-]
+}

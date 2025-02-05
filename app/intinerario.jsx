@@ -1,18 +1,33 @@
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-import Header from '../components/Header'
+import Header from '../components/Header';
 
-import { dataL } from '../components/dataL';
+import { useFetchData } from '../hooks/useFetchData';
+
 import UtInfo from '../components/subcomponents/UtInfo';
 
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
 
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { useFocusEffect } from 'expo-router';
 
 export default function Intinerario(){
 
-  const busesEM = dataL[2];
+  const [expressbus, setExpresBus] = useState([]);
+  const [regularbus, setRegularBus] = useState([]);
+    
+    const data = useFetchData('expressbus')
+    const data2 = useFetchData('regularbus')
+  
+    useEffect(() => {
+      if (data && data.length > 0) {
+        setExpresBus(data); // Actualizamos el estado solo cuando los datos están disponibles
+      }
+  
+      if (data2 && data2.length > 0) {
+        setRegularBus(data2); // Actualizamos el estado solo cuando los datos están disponibles
+      }
+    }, [data, data2]);
 
   const viewRef = useRef(null);
 
@@ -39,7 +54,7 @@ export default function Intinerario(){
           <View style={styles.seccion}>
         
           {
-            busesEM.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.  busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
+            expressbus.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.  busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
           }
 
           </View> 
@@ -47,7 +62,7 @@ export default function Intinerario(){
           <View style={styles.seccion}>
         
           {
-            busesOM.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
+            regularbus.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
           }
 
           </View> 

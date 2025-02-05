@@ -1,6 +1,5 @@
-import { useState } from "react";
 
-import { View, StyleSheet, Pressable, Dimensions, ScrollView, Text, TouchableOpacity, Easing } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Easing } from "react-native";
 
 import * as Animatable from 'react-native-animatable';
 
@@ -16,13 +15,23 @@ import PinEstacionUno from "../img/PinEstacion1.png"
 
 import Header from '../components/Header'
 
-import { dataL } from "../components/dataL";
-
-import { useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useFocusEffect } from "expo-router";
+
+import { useFetchData } from "../hooks/useFetchData";
 
 export default function Mapa(){
 
+    const [stations, setStations] = useState([]);
+
+    const data = useFetchData('stations')
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+          setStations(data); // Actualizamos el estado solo cuando los datos están disponibles
+        }
+      }, [data]);
+    
     const viewRef = useRef(null);
 
     useFocusEffect(
@@ -45,8 +54,6 @@ export default function Mapa(){
     });
 
     const [selectedEstation, setSelectionEstation] = useState(null);
-
-    const estaciones = dataL[1];
 
     return(
         <ScrollView style={styles.container}>
@@ -72,12 +79,12 @@ export default function Mapa(){
 
                         
                         {
-                            estaciones.map((estacion, index) => 
+                            stations.map((station, index) => 
                             <Marker
-                                onPress={() => setSelectionEstation(estacion)}
+                                onPress={() => setSelectionEstation(station)}
                                 key={index}
-                                image={estacion.image == "Origen" ? PinOrigen : (estacion.image == "Destino" ?PinDestino : PinEstacionUno) }
-                                coordinate={{latitude: estacion.latitude, longitude: estacion.longitude}} 
+                                image={station.image == "Origen" ? PinOrigen : (station.image == "Destino" ?PinDestino : PinEstacionUno) }
+                                coordinate={{latitude: station.latitude, longitude: station.longitude}} 
                                 onDragEnd={(direction) => setOrigin(direction.nativeEvent.coordinate)}                           
                                 >
                                 
