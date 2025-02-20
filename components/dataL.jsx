@@ -3,7 +3,7 @@ export const dataD = {
   indexcards: [
     {
       iconh: "bus-alt",
-      title: "Intinerario",
+      title: "Itinerario",
       texto: "aqui podra observar el intinerario de viaje de todos los autobuses durante todo el dia con sus repectiva tarifa",
       spam: "Si desea informacion detallada haga click en la pestaña intinerario",
       iconf: "info-circle",
@@ -19,9 +19,9 @@ export const dataD = {
     },
     {
       iconh: "users",
-      title: "Trasporte Privado",
-      texto: "Da click aqui para ver mas informacion sobre servicios de transportes privados ",
-      spam: "Estolfkds;aljf;aklsdjf",
+      title: "Devtools",
+      texto: "Da click aqui para saber mas sobre nosotros y nuestros proximos proyectos",
+      spam: "¿Necesitas una web para tu negocio? Contactanos",
       iconf: "info-circle",
       modal: "modal3"
     },
@@ -143,15 +143,17 @@ export const dataD = {
   },
 ],
 
-  busesEM: [
+  expressbus: [
     {
       iconb: "bus-alt",
       busnombre: "Karina",
       tel: "+505 8640 8080",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "03:45 a.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
     },
     {
       iconb: "bus-alt",
@@ -159,8 +161,12 @@ export const dataD = {
       tel: "+505 8669 1611",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "05:00 a.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
+      web: "",
+      iconw: ""
     },
     {
     iconb: "bus-alt",
@@ -168,8 +174,12 @@ export const dataD = {
     tel: "00000003",
     numasiento: "70",
     iconh: "clock",
+    image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
     hora: "06:15 a.m",
-    coloricon: "#CBBDF0"
+    coloricon: "#CBBDF0",
+    ruta: "Somoto - Managua",
+    web: "",
+      iconw: ""
     },
     {
       iconb: "bus-alt",
@@ -177,8 +187,12 @@ export const dataD = {
       tel: "00000004",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "07:40 a.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
+      web: "",
+      iconw: ""
     },
     {
       iconb: "bus-alt",
@@ -186,8 +200,12 @@ export const dataD = {
       tel: "00000000",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "02:00 p.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
+      web: "",
+      iconw: ""
     },
     {
       iconb: "bus-alt",
@@ -195,20 +213,26 @@ export const dataD = {
       tel: "00000000",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "03:15 p.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
     },
 ],
 
-  busesOM: [
+  regularbus: [
     {
       iconb: "bus-alt",
       busnombre: "Gonzalez",
       tel: "00000000",
       numasiento: "70",
       iconh: "clock",
+      image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
       hora: "04:00 a.m",
-      coloricon: "#CBBDF0"
+      coloricon: "#CBBDF0",
+      ruta: "Somoto - Managua",
+      web: "",
+      iconw: ""
     },
     {
         iconb: "bus-alt",
@@ -216,8 +240,12 @@ export const dataD = {
         tel: "#00000000",
         numasiento: "70",
         iconh: "clock",
+        image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
         hora: "04:40 a.m",
-        coloricon: "#CBBDF0"
+        coloricon: "#CBBDF0",
+        ruta: "Somoto - Managua",
+        web: "",
+      iconw: ""
     },
     {
         iconb: "bus-alt",
@@ -225,8 +253,12 @@ export const dataD = {
         tel: "#00000000",
         numasiento: "70",
         iconh: "clock",
+        image: "1EgnJPkCrQVYQvpwN_siIi_xRlbtZBfb5",
         hora: "07:25 a.m",
-        coloricon: "#CBBDF0"
+        coloricon: "#CBBDF0",
+        ruta: "Somoto - Managua",
+        web: "",
+      iconw: ""
     },
 ]
 }

@@ -1,5 +1,4 @@
-
-import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Easing } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity } from "react-native";
 
 import * as Animatable from 'react-native-animatable';
 
@@ -55,6 +54,7 @@ export default function Mapa(){
 
     const [selectedEstation, setSelectionEstation] = useState(null);
 
+
     return(
         <ScrollView style={styles.container}>
             <Header title="Mapa de"/>
@@ -83,7 +83,7 @@ export default function Mapa(){
                             <Marker
                                 onPress={() => setSelectionEstation(station)}
                                 key={index}
-                                image={station.image == "Origen" ? PinOrigen : (station.image == "Destino" ?PinDestino : PinEstacionUno) }
+                                image={station.type == "origen" ? PinOrigen : (station.type == "destino" ? PinDestino : PinEstacionUno) }
                                 coordinate={{latitude: station.latitude, longitude: station.longitude}} 
                                 onDragEnd={(direction) => setOrigin(direction.nativeEvent.coordinate)}                           
                                 >
@@ -103,8 +103,12 @@ export default function Mapa(){
                     { selectedEstation && <Card estacion={selectedEstation}/> }
                 </View>
                 <View style={styles.destinos}>
-                    <TouchableOpacity style={styles.destino}
-                        onPress={() => {setDestination({latitude: 13.622222851305803, longitude: -86.47608160981525 })}}>
+                    <TouchableOpacity 
+                        style={styles.destino}
+                        onPress={() => {
+                            setDestination({latitude: 13.622222851305803, longitude: -86.47608160981525 });
+                        }}
+                        >
                             <Text style={styles.textbutton} >Ocotal</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -135,8 +139,8 @@ const styles = StyleSheet.create({
     seccionmapa: {
         alignItems: 'center',
         backgroundColor: 'white',
-        borderTopRightRadius: 40,
-        borderTopLeftRadius: 40,
+        borderTopRightRadius: '5%',
+        borderTopLeftRadius: '5%',
         alignItems: 'center',
         marginTop: '10%',
         paddingTop: '16%',

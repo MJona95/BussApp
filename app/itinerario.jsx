@@ -1,17 +1,19 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 
 import Header from '../components/Header';
+import CardAnimated from '../components/subcomponents/CardAnimated';
 
 import { useFetchData } from '../hooks/useFetchData';
 
-import UtInfo from '../components/subcomponents/UtInfo';
 
 import * as Animatable from 'react-native-animatable';
 
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { useFocusEffect } from 'expo-router';
 
-export default function Intinerario(){
+const { width } = Dimensions.get('window');
+
+export default function Itinerario(){
 
   const [expressbus, setExpresBus] = useState([]);
   const [regularbus, setRegularBus] = useState([]);
@@ -41,35 +43,36 @@ export default function Intinerario(){
   );
 
   return(
-    <ScrollView style={styles.container}>
-
-      <Header title="Intinerario de" />
-      
-      <Animatable.View 
-        style={styles.containerinfo}
-        ref={viewRef}
+    <View style={styles.container}>
+      <Header title="Itinerario de" />
+      <ScrollView>
+        <Animatable.View 
+          style={styles.containerinfo}
+          ref={viewRef}
         >
         <View style={styles.containerseccion}>
           <Text style={styles.titleseccion}> Expresos a Managua - Esteli </Text>
           <View style={styles.seccion}>
-        
+  
           {
-            expressbus.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.  busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
+            expressbus.map((info, index) => <CardAnimated key={index} iconb={info.iconb} image={info.image} busnombre={info.busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} ruta={info.ruta} />)
           }
 
-          </View> 
-          <Text style={styles.titleseccion}> Servicio Ordinario Ocotal, Esteli y Managua</Text>
-          <View style={styles.seccion}>
-        
-          {
-            regularbus.map((info, index) => <UtInfo key={index} iconb={info.iconb} busnombre={info.busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} />)
-          }
+        </View> 
+        <Text style={styles.titleseccion}> Servicio Ordinario Ocotal, Esteli y Managua</Text>
+        <View style={styles.seccion}>
+  
+        {
+          regularbus.map((info, index) => <CardAnimated key={index} iconb={info.iconb} image={info.image} busnombre={info.busnombre} tel={info.tel} numasiento={info.numasiento} iconhora={info.iconh} hora={info.hora} coloricon={info.coloricon} ruta={info.ruta} />)
+        }
 
-          </View> 
+
+        </View> 
 
         </View>
       </Animatable.View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -79,8 +82,8 @@ const styles = StyleSheet.create({
   },
   containerinfo: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    borderTopLeftRadius: '5%',
+    borderTopRightRadius: '5%',
     alignItems: 'center',
     marginTop: '10%',
     paddingTop: '12%',
@@ -90,17 +93,20 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     width: '80%',
     alignItems: 'center',
-    justifyContent: "center"
+    justifyContent: "center",
   },
   titleseccion: {
     color: '#5D93D9',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: width * 0.055,
     textAlign: 'center',
-    marginBottom: 20
+    marginBottom: '4%'
   },
   seccion: {
-    flexWrap: 'wrap',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  image: {
+    width: '44.5%',
+    aspectRatio: 1,
+}
 })

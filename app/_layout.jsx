@@ -23,18 +23,18 @@ export default function Layout(){
             />
 
             <Tabs.Screen
-                name="intinerario"
+                name="itinerario"
                 options={{
                     headerShown: false,
-                    title: "Intinerario"
+                    title: "Itinerario"
                 }}
             />
 
             <Tabs.Screen
-                name="nosotros"
+                name="privado"
                 options={{
                     headerShown: false,
-                    title: "Nosotros"
+                    title: "Privado"
                 }}
             />
 

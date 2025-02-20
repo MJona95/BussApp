@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 
@@ -11,6 +11,8 @@ import { useRef, useCallback, useState, useEffect } from 'react';
 import { useFocusEffect } from 'expo-router';
 
 import { useFetchData } from '../hooks/useFetchData';
+
+const { width } = Dimensions.get('window')
 
 export default function home() {
 
@@ -35,50 +37,44 @@ export default function home() {
   );
 
   return (
-    <ScrollView style={styles.container}>
-
-          <Header title='Bienvenidos a ' />
-        
-          <Animatable.View 
-              ref={viewRef}
-              style={styles.containercard}
-            >
-
-            <View style={styles.image}>
-              <Ipresentation/>
-            </View>
-            <Text style={styles.textimage}>
-                Te brindamos informacion durante tu viaje a la capital de la amistad 
-            </Text>
-
+    <View style={styles.container}>
+      <Header title='Bienvenidos a' />
+      <ScrollView>
+        <Animatable.View 
+          ref={viewRef}
+          style={styles.containercard}
+        >
+          <View style={styles.image}>
+            <Ipresentation/>
+          </View>
+          <Text style={styles.textimage}>
+             Te brindamos informacion durante tu viaje a la capital de la amistad 
+          </Text>
             {
-
               Cards.map((info, index) => <Card key={index} image={info.image} icon={info.iconh} title={info.title} texto={info.texto} spam={info.spam} iconf={info.iconf} modal={info.modal} />)
-
             }
-            
-          </Animatable.View>
-
-    </ScrollView>
+        </Animatable.View>
+      </ScrollView>
+    </View>
+    
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    zIndex: 1,
   },
   image: {
-    marginTop: 80,
+    marginTop: '18%',
     alignItems: 'center',
     marginBottom: '-10%'
   },
   textimage: {
     color: '#CBBDF0',
-    fontSize: 13,
-    marginTop: 10,
+    fontSize: width * 0.035,
+    marginTop: '2%',
     fontWeight: 'bold',
-    paddingHorizontal: 25,
+    paddingHorizontal: '5%',
     textAlign: 'center'
   },
   containercard: {

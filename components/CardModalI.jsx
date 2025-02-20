@@ -25,7 +25,7 @@ export default function CardModalI() {
   
   return (
     <View style={styles.container} >
-      <Text style={styles.title} > Intinerario de viaje </Text>
+      <Text style={styles.title} > Itinerario de viaje </Text>
         <Text style={styles.titleinfo}>Expresos a Managua - Esteli</Text>
       <View style={styles.informacion} >
          {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       borderRadius: 10
     },
-    title: {
+    title: { 
       color: '#5D93D9',
       fontWeight: 'bold',
       fontSize: 25,

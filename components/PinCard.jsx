@@ -1,15 +1,16 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
 
-const image = require('../assets/prueba1.jpg');
-
-const firstColor = "#5D93D9"
-const secondColor = "#CBBDF0"
+const { width, height } = Dimensions.get('window');
 
 export default function PinCard({estacion}) {
 
+  console.log(estacion.image)
+
   return (
     <View style={styles.card}>
-        <Image source={image} style={styles.image} />
+        <Image 
+          source={{uri: `https://drive.google.com/uc?export=view&id=${estacion.image}`}} 
+          style={styles.image} />
         <View style={styles.cardInfo}>
           <Text style={styles.title}>{estacion.title}</Text>
           <Text style={styles.descripcion}>{estacion.descripcion}</Text>
@@ -33,37 +34,36 @@ const styles = StyleSheet.create({
     card: {
       backgroundColor: 'white',
       position: 'absolute',
-      bottom: 10,
-      right: 10,
-      left: 10,
+      bottom: height * 0.015,
+      right: width * 0.02,
+      left: width * 0.02,
       borderRadius: 15,
       overflow: 'hidden',
-
       flexDirection: 'row',
     },
     image: {
-      width: 165,
+      width: width * 0.42,
       aspectRatio: 1
     },
     cardInfo: {
-      paddingVertical: 5,
-      paddingHorizontal: 10,
+      paddingVertical: height * 0.007,
+      paddingHorizontal: width * 0.02,
       flex: 1,
       alignItems: 'center'
     },
     title: {
-      paddingBottom: 2,
-      fontSize: 15,
-      fontWeight: 'bold'
+      fontSize: width * 0.045,
+      fontWeight: 900
     },
     descripcion: {
-      fontSize: 10,
-      textAlign: 'center'
+      fontSize: width * 0.028,
+      textAlign: 'center',
+      fontWeight: 300
     },
     detalles: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      paddingTop: 5,
+      paddingTop: height * 0.004,
       justifyContent: 'center'
     },
     descE:{
@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
       marginHorizontal: 5
     },
     footer: {
-      marginTop: 5
+      marginTop: width * 0.01
     },
     textfooter: {
-      fontSize: 9,
-      textAlign: 'center'
+      fontSize: width * 0.024,
+      textAlign: 'center',
+      fontWeight: 500
     }
 })

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 
 import * as Animatable from 'react-native-animatable';
 
@@ -8,6 +8,8 @@ import { useCallback, useRef } from "react";
 import { useFocusEffect } from "expo-router";
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+
+const { width } = Dimensions.get('window')
 
 export default function Header({ title }){
 
@@ -47,10 +49,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         width: '100%',
-        borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: width * 0.095,
+        borderBottomRightRadius: width * 0.095,
         position: 'absolute',
-        zIndex: 2
+
+        zIndex: 1, // Asegura que esté por encima del scroll
       },
       textos: {
         paddingHorizontal: 5,
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
       },
       title: {
         color: 'white',
-        fontSize: 25,
+        fontSize: width * 0.06,
         fontWeight: 'bold',
       },
       spam: {

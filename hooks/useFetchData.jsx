@@ -12,21 +12,26 @@ export function useFetchData(collection_name) {
 
         const fetchData = async () => {
             try {
+                
                 // 1️⃣ Buscar datos locales almacenados en AsyncStorage
                 let lData = await AsyncStorage.getItem('lData');
                 lData = lData ? JSON.parse(lData) : {}; // Convierte en objeto si existe, sino crea uno vacío
+
+                let upDateDays = await AsyncStorage.getItem('upDate');
+                upDateDays = upDateDays ? JSON.parse(upDateDays) : {}
+                console.log(upDateDays)
 
                 // 2️⃣ Obtener la última fecha de actualización
                 const lastFetchDate = await AsyncStorage.getItem('lastFetchDate');
                 const today = new Date().toISOString().split('T')[0];
 
                 // 3️⃣ Si la última actualización fue hace menos de 30 días, usa los datos locales
-                if (lastFetchDate) {
+                if (!!lastFetchDate) {
                     const lastDate = new Date(lastFetchDate);
                     const todayDate = new Date(today);
                     const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
 
-                    if (diffDays <= 30 && lData[collection_name]) {
+                    if (diffDays <= upDateDays && lData[collection_name]) {
                         setData(lData[collection_name]);
                         console.log("📌 Usando datos locales:", lData[collection_name]);         
                         return;
@@ -46,7 +51,13 @@ export function useFetchData(collection_name) {
                 await AsyncStorage.setItem('lData', JSON.stringify(lData));
                 await AsyncStorage.setItem('lastFetchDate', today);
 
-                setData(updatedArray);
+                setData(updatedArray); 
+
+                //upDate
+                const querySnapshotDays = await getDocs(collection(database, 'version'));
+                const daysToUpdate = querySnapshotDays.docs.flatMap((doc) => doc.data()['version'] || []);
+                const upDate = daysToUpdate[0].update;
+                await AsyncStorage.setItem('upDate', JSON.stringify(upDate));
                 console.log("✅ Datos actualizados:", updatedArray);
 
             } catch (error) {
