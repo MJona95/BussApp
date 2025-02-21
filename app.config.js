@@ -28,10 +28,14 @@ export default {
     web: {
       "favicon": "./assets/favicon.png"
     },
+    owner: "mjona9514",
     plugins: [
       "expo-router",
       "expo-font"
     ],
+    android: {
+      package: "com.Mjona9514.tuapp" // Usa un identificador único, como "com.miempresa.miapp"
+    },
     extra: {
         apiKey: process.env.API_KEY,
         authDomain: process.env.AUTH_DOMAIN,

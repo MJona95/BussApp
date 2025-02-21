@@ -4,8 +4,6 @@ const { width, height } = Dimensions.get('window');
 
 export default function PinCard({estacion}) {
 
-  console.log(estacion.image)
-
   return (
     <View style={styles.card}>
         <Image 

@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native'
 const { width, height } = Dimensions.get('window')
 
 export default function CardModalAbaut({ title, paragraph, link }) {
-
-  console.log(title)
   return (
     <View style={styles.infoseccion}>
         <Text style={styles.title}>{title}</Text>
