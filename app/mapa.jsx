@@ -8,9 +8,9 @@ import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { EXPO_PUBLIC_API_KEY_GM } from "@env"
 
-import PinOrigen from "../img/PinOrigen.png";
-import PinDestino from "../img/PinDestino.png"
-import PinEstacionUno from "../img/PinEstacion1.png"
+import PinOrigen from "../assets/PinOrigen.png";
+import PinDestino from "../assets/PinDestino.png"
+import PinEstacionUno from "../assets/PinEstacion1.png"
 
 import Header from '../components/Header'
 

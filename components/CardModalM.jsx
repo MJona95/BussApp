@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
 
-import PinOrigen from "../img/PinOrigen.png";
-import pinEstacionUno from "../img/PinEstacion1.png";
-import pinDestino from "../img/PinDestino.png";   
+import PinOrigen from "../assets/PinOrigen.png";
+import pinEstacionUno from "../assets/PinEstacion1.png";
+import pinDestino from "../assets/PinDestino.png";   
 
 import Fontisto from '@expo/vector-icons/Fontisto';
 
