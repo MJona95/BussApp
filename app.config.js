@@ -20,9 +20,10 @@ export default {
       "supportsTablet": true
     },
     android: {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+      package: "com.Mjona9514.tuapp",
+      adaptiveIcon: {
+        foregroundImage: "./assets/adaptive-icon.png",
+        backgroundColor: "#ffffff"
       }
     },
     web: {
@@ -33,9 +34,6 @@ export default {
       "expo-router",
       "expo-font"
     ],
-    android: {
-      package: "com.Mjona9514.tuapp" // Usa un identificador único, como "com.miempresa.miapp"
-    },
     extra: {
         apiKey: process.env.API_KEY,
         authDomain: process.env.AUTH_DOMAIN,
@@ -49,4 +47,3 @@ export default {
     }
   }
 }
-
