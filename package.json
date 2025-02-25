@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -31,7 +31,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
     "typescript": "~5.3.3",
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "expo": "~52.0.37"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
