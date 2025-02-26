@@ -1,7 +1,11 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config');
 
-/** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname);
-
-module.exports = config;
+module.exports = {
+    resolver: {
+      assetExts: ["png", "jpg", "jpeg", "gif", "svg"], // Bloquea los archivos .webp
+      sourceExts: ["js", "jsx", "ts", "tsx"], // Mantén esto si usas TypeScript
+    },
+    transformer: {
+      assetPlugins: ["expo-asset/tools/hashAssetFiles"],
+    },
+  };
+  
