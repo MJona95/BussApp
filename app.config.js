@@ -5,7 +5,7 @@ export default {
   expo: {
     "newArchEnabled": true,
     "name": "BussApp",
-    "slug": "BussApp",
+    "slug": "bussapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -39,7 +39,7 @@ export default {
         messagingSenderId: process.env.MESSAGING_SENDER_ID,
         appId: process.env.APP_ID,
         eas: {
-          projectId: "43e55766-8873-4e7b-8ad6-31fb6fb2c95e"
+          projectId: "467dbc0d-b6dc-471c-b51c-9ee0c1ecd587"
         }
     }
   }
