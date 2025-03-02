@@ -20,7 +20,6 @@ export default {
       "supportsTablet": true
     },
     android: {
-      package: "com.Mjona9514.tuapp",
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#ffffff"
