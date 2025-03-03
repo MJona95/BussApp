@@ -1,4 +1,6 @@
 import { registerRootComponent } from 'expo';
+import 'core-js';
+import 'regenerator-runtime';
 
 import App from './App';
 

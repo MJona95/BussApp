@@ -4795,6 +4795,11 @@ core-js-compat@^3.38.0:
   dependencies:
     browserslist "^4.24.3"
 
+core-js@^3.41.0:
+  version "3.41.0"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.41.0.tgz"
+  integrity sha512-SJ4/EHwS36QMJd6h/Rg+GyR4A5xE0FSI3eZ+iBVpfqf1x0eTSg1smWLHrA+2jQThZSh97fmSgFSU8B61nxosxA==
+
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -10290,7 +10295,7 @@ regenerator-runtime@^0.13.4:
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
-regenerator-runtime@^0.14.0:
+regenerator-runtime@^0.14.0, regenerator-runtime@^0.14.1:
   version "0.14.1"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==

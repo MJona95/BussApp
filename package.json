@@ -12,6 +12,7 @@
     "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@types/react": "~18.3.12",
+    "core-js": "^3.41.0",
     "dotenv": "^16.4.7",
     "eas-cli": "^15.0.12",
     "expo": "~52.0.37",
@@ -31,6 +32,7 @@
     "react-native-safe-area-context": "^5.2.0",
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
+    "regenerator-runtime": "^0.14.1",
     "typescript": "~5.3.3",
     "url-parse": "^1.5.10"
   },
