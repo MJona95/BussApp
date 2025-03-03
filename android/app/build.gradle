@@ -86,7 +86,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.bussapp"
+    namespace "com.Mjona9514.tuapp"
     defaultConfig {
         applicationId 'com.Mjona9514.tuapp'
         minSdkVersion rootProject.ext.minSdkVersion
