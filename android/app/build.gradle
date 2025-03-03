@@ -88,7 +88,7 @@ android {
 
     namespace "com.bussapp"
     defaultConfig {
-        applicationId 'com.bussapp'
+        applicationId 'com.Mjona9514.tuapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
