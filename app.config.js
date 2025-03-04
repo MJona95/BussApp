@@ -31,12 +31,12 @@ export default {
       "expo-font"
     ],
     extra: {
-        apiKey: process.env.API_KEY,
-        authDomain: process.env.AUTH_DOMAIN,
-        projectId: process.env.PROJECT_ID,
-        storageBucket: process.env.STORAGE_BUCKET,
-        messagingSenderId: process.env.MESSAGING_SENDER_ID,
-        appId: process.env.APP_ID,
+        apiKey: process.env.EXPO_PUBLIC_API_KEY,
+        authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+        storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+        messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDER_ID,
+        appId: process.env.EXPO_PUBLIC_APP_ID,
         eas: {
           projectId: "467dbc0d-b6dc-471c-b51c-9ee0c1ecd587"
         }
