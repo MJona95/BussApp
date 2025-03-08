@@ -7,7 +7,7 @@ import * as Location from 'expo-location';  // 📌 Importamos el paquete de ubi
 
 import Card from "../components/PinCard";
 
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
 import PinOrigen from "../assets/PinOrigen.png";
@@ -92,6 +92,7 @@ export default function Mapa(){
             >
                 <View style={styles.mapcontainer}>
                     <MapView 
+                        provider={PROVIDER_GOOGLE}
                         onPress={() => setSelectionEstation(null)}
                         style={styles.mapa} 
                         initialRegion={{
