@@ -3,7 +3,7 @@ import { defineConfig } from 'expo/config'
 
 export default {
   expo: {
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "name": "BussApp",
     "slug": "bussapp",
     "version": "1.0.0",
