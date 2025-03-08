@@ -11,6 +11,7 @@ export default {
     "icon": "./assets/icon.png",
     "scheme": "whatsapp",
     "userInterfaceStyle": "light",
+    "plugins": ["react-native-maps"],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
