@@ -1,4 +1,5 @@
 import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity } from "react-native";
+import Constants  from "expo-constants";
 
 import * as Animatable from 'react-native-animatable';
 import * as Location from 'expo-location';  // 📌 Importamos el paquete de ubicación
@@ -8,7 +9,6 @@ import Card from "../components/PinCard";
 
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-import { EXPO_PUBLIC_API_KEY_GM } from "@env"
 
 import PinOrigen from "../assets/PinOrigen.png";
 import PinDestino from "../assets/PinDestino.png"
@@ -22,6 +22,8 @@ import { useFocusEffect } from "expo-router";
 import { useFetchData } from "../hooks/useFetchData";
 
 export default function Mapa(){
+
+    const EXPO_PUBLIC_API_KEY_GM = Constants.expoConfig.extra.apikeym
 
     const [stations, setStations] = useState([]);
 

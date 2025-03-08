@@ -33,6 +33,7 @@ export default {
     ],
     extra: {
         apiKey: process.env.EXPO_PUBLIC_API_KEY,
+        apikeym: process.env.EXPO_PUBLIC_API_KEY_GM,
         authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
         projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
         storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
