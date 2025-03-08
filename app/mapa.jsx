@@ -1,6 +1,8 @@
 import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity } from "react-native";
 
 import * as Animatable from 'react-native-animatable';
+import * as Location from 'expo-location';  // 📌 Importamos el paquete de ubicación
+
 
 import Card from "../components/PinCard";
 
@@ -23,12 +25,35 @@ export default function Mapa(){
 
     const [stations, setStations] = useState([]);
 
+    // 📌 Estado para la ubicación del usuario
+    const [userLocation, setUserLocation] = useState(null);
+
+    // 📌 Función para solicitar permisos y obtener ubicación
+    const getLocation = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+
+        if (status !== 'granted') {
+            Alert.alert("Permiso denegado", "Activa los permisos de ubicación en la configuración.");
+            return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        setUserLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude
+        });
+    };
+
     const data = useFetchData('stations')
 
     useEffect(() => {
+        
         if (data && data.length > 0) {
           setStations(data); // Actualizamos el estado solo cuando los datos están disponibles
         }
+
+        getLocation();
+
       }, [data]);
     
     const viewRef = useRef(null);
