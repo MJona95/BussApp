@@ -11,7 +11,7 @@ export default {
     "icon": "./assets/icon.png",
     "scheme": "whatsapp",
     "userInterfaceStyle": "light",
-    "plugins": ["react-native-maps"],
+    "plugins": ["react-native-maps", {"config":{"googleMaps": true}}],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
