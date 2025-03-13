@@ -27,7 +27,3 @@ export default function CardModalA() {
   );
 
 }
-
-const styles = StyleSheet.create({
-    
-})

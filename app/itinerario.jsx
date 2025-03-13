@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, useWindowDimensions, PixelRatio } from 'react-native';
 
 import Header from '../components/Header';
 import CardAnimated from '../components/subcomponents/CardAnimated';
@@ -8,12 +8,19 @@ import { useFetchData } from '../hooks/useFetchData';
 
 import * as Animatable from 'react-native-animatable';
 
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect, useMemo } from 'react';
 import { useFocusEffect } from 'expo-router';
 
-const { width } = Dimensions.get('window');
 
 export default function Itinerario(){
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
 
   const [expressbus, setExpresBus] = useState([]);
   const [regularbus, setRegularBus] = useState([]);
@@ -41,6 +48,39 @@ export default function Itinerario(){
       }
     }, [])
   );
+
+  const styles = useMemo(
+    () => StyleSheet.create({
+      container: {
+        flex: 1,
+      },
+      containerinfo: {
+        backgroundColor: 'white',
+        borderTopLeftRadius: width * 0.1,
+        borderTopRightRadius: width * 0.1,
+        alignItems: 'center',
+        marginTop: height*0.045,
+        paddingTop: height*0.055,
+        paddingBottom:  height*0.11
+      },
+      containerseccion: {
+        marginTop: height*0.05,
+        width: width*0.8,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      titleseccion: {
+        color: '#5D93D9',
+        fontWeight: 'bold',
+        fontSize: getFontSize(23),
+        textAlign: 'center',
+        marginBottom: height*0.02
+      },
+      seccion: {
+        justifyContent: 'center',
+      },
+    })
+  )
 
   return(
     <View style={styles.container}>
@@ -75,38 +115,3 @@ export default function Itinerario(){
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  containerinfo: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: '5%',
-    borderTopRightRadius: '5%',
-    alignItems: 'center',
-    marginTop: '10%',
-    paddingTop: '12%',
-    paddingBottom: '23%'
-  },
-  containerseccion: {
-    marginTop: '10%',
-    width: '80%',
-    alignItems: 'center',
-    justifyContent: "center",
-  },
-  titleseccion: {
-    color: '#5D93D9',
-    fontWeight: 'bold',
-    fontSize: width * 0.055,
-    textAlign: 'center',
-    marginBottom: '4%'
-  },
-  seccion: {
-    justifyContent: 'center',
-  },
-  image: {
-    width: '44.5%',
-    aspectRatio: 1,
-}
-})

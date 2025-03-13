@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, useWindowDimensions, PixelRatio } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 
@@ -6,15 +6,22 @@ import Header from '../components/Header'
 import Ipresentation from '../components/Ipresentation';
 import Card from '../components/Card';
 
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect, useMemo } from 'react';
 
 import { useFocusEffect } from 'expo-router';
 
 import { useFetchData } from '../hooks/useFetchData';
 
-const { width } = Dimensions.get('window')
-
 export default function home() {
+
+  const { width, height } = useWindowDimensions();
+
+   // ✅ Función para calcular el tamaño de la fuente con PixelRatio
+   const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
 
   const [ Cards, setCards ] = useState([]);
   const viewRef = useRef(null);
@@ -34,6 +41,36 @@ export default function home() {
         
       }
     }, [])
+  );
+
+  // ✅ Se recalcula solo cuando `width` o `height` cambian
+  const styles = useMemo(
+    () => StyleSheet.create({
+        container: {
+          flex: 1,
+        },
+        image: {
+          marginTop: height * 0.090,
+          alignItems: 'center',
+          marginBottom: height * -0.055,
+        },
+        textimage: {
+          color: '#CBBDF0',
+          fontSize: getFontSize(14),
+          marginTop: height * 0.010,
+          fontWeight: 'bold',
+          paddingHorizontal: width * 0.058,
+          textAlign: 'center'
+        },
+        containercard: {
+          backgroundColor: 'white',
+          borderTopLeftRadius: width * 0.15,
+          borderTopRightRadius: width * 0.15,
+          alignItems: 'center',
+          paddingBottom: height * 0.117
+        }
+      }),
+    [width, height] // ✅ Solo se actualiza cuando `width` o `height` cambian
   );
 
   return (
@@ -59,29 +96,3 @@ export default function home() {
     
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    marginTop: '18%',
-    alignItems: 'center',
-    marginBottom: '-10%'
-  },
-  textimage: {
-    color: '#CBBDF0',
-    fontSize: width * 0.035,
-    marginTop: '2%',
-    fontWeight: 'bold',
-    paddingHorizontal: '5%',
-    textAlign: 'center'
-  },
-  containercard: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    alignItems: 'center',
-    paddingBottom: '23%'
-  }
-})

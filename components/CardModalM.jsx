@@ -1,4 +1,6 @@
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, useWindowDimensions, PixelRatio } from 'react-native';
+
+import { useMemo } from 'react';
 
 import PinOrigen from "../assets/PinOrigen.png";
 import pinEstacionUno from "../assets/PinEstacion1.png";
@@ -7,6 +9,47 @@ import pinDestino from "../assets/PinDestino.png";
 import Fontisto from '@expo/vector-icons/Fontisto';
 
 export default function CardModalM() {
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
+
+  const styles = useMemo(
+    () => StyleSheet.create({
+      container: {
+        alignItems: 'center',
+      },
+      title: {
+        color: '#5D93D9',
+        fontSize: getFontSize(23),
+        fontWeight: 'bold',
+        marginVertical: height*0.02
+      },
+      seccion: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: height*0.015,
+        paddingHorizontal: width*0.085,
+  
+      },
+      image: {
+        width: width*0.131,
+        height: height*0.085,
+        marginHorizontal: width*0.01,
+        marginBottom: height*0.01
+      },
+      descripcion: {
+        marginHorizontal: width*0.025,
+        fontSize: getFontSize(14),
+        textAlign: 'center'
+      }
+  })
+  )
+
   return (
     <View style={styles.container} >
       <Text style={styles.title} > Iconos usados en el mapa </Text>
@@ -37,32 +80,3 @@ export default function CardModalM() {
     </View>
   )
   }
-
-const styles = StyleSheet.create({
-    container: {
-      alignItems: 'center',
-    },
-    title: {
-      color: '#5D93D9',
-      fontSize: 20,
-      fontWeight: 'bold',
-      margin: 10
-    },
-    seccion: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingTop: 20,
-      paddingHorizontal: 30,
-
-    },
-    image: {
-      width: 50,
-      height: 63,
-      marginHorizontal: 10,
-      marginBottom: 5
-    },
-    descripcion: {
-      marginHorizontal: 10,
-      textAlign: 'center'
-    }
-})

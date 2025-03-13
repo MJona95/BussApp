@@ -1,17 +1,62 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions, PixelRatio } from "react-native";
 
 import * as Animatable from 'react-native-animatable';
 
 import { StatusBar } from "expo-status-bar";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useMemo } from "react";
 import { useFocusEffect } from "expo-router";
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-const { width } = Dimensions.get('window')
-
 export default function Header({ title }){
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
+
+  const styles = useMemo(
+    () => StyleSheet.create({
+      header: {
+          backgroundColor: '#5D93D9',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+          width: width*1,
+          borderBottomLeftRadius: width * 0.095,
+          borderBottomRightRadius: width * 0.095,
+          position: 'absolute',
+  
+          zIndex: 1, // Asegura que esté por encima del scroll
+        },
+        textos: {
+          paddingHorizontal: 5,
+          paddingVertical: height*0.039,
+          alignItems: 'center'
+        },
+        title: {
+          color: 'white',
+          fontSize: getFontSize(25),
+          fontWeight: 'bold',
+        },
+        spam: {
+          color: '#CBBDF0',
+        },
+        subtitle: {
+          color: 'white',
+          paddingTop: 1,
+          fontSize: getFontSize(12)
+        },
+        icon: {
+          paddingHorizontal: width*0.01,
+          marginTop: height*0.01
+        }
+  })
+  )
 
   const viewRef = useRef(null);
 
@@ -42,40 +87,4 @@ export default function Header({ title }){
     )
 }
 
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: '#5D93D9',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        width: '100%',
-        borderBottomLeftRadius: width * 0.095,
-        borderBottomRightRadius: width * 0.095,
-        position: 'absolute',
-
-        zIndex: 1, // Asegura que esté por encima del scroll
-      },
-      textos: {
-        paddingHorizontal: 5,
-        paddingBottom: 20,
-        marginTop: '10%',  
-        alignItems: 'center'
-      },
-      title: {
-        color: 'white',
-        fontSize: width * 0.06,
-        fontWeight: 'bold',
-      },
-      spam: {
-        color: '#CBBDF0',
-      },
-      subtitle: {
-        color: 'white',
-        paddingTop: 1,
-        fontSize: 10
-      },
-      icon: {
-        paddingHorizontal: 15,
-        marginTop: '5%'
-      }
-})
+const styles = StyleSheet.create()

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Modal } from 'react-native';
+import { useState, useMemo } from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, useWindowDimensions, PixelRatio, TouchableOpacity, Modal } from 'react-native';
 
 import CardModalI from '../components/CardModalI';
 import CardModalM from '../components/CardModalM';
@@ -7,9 +7,102 @@ import CardModalA from '../components/CardModalA';
 
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-const { width, height } = Dimensions.get('window')
-
 export default function Card({image, icon, title, texto, spam, iconf, modal}) {
+
+    const { width, height } = useWindowDimensions();
+
+    const getFontSize = (size) => {
+        const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+        const newSize = size * scale;
+        return Math.round(PixelRatio.roundToNearestPixel(newSize));
+    };
+
+    const styles = useMemo(
+        () => StyleSheet.create({
+            container: {
+                width: width * 0.9,
+                height: height * 0.2285,
+            },
+            card: {
+                backgroundColor: 'white',
+                borderWidth: width*0.0015,
+                borderColor: '#ccc',
+                flex: 1,
+                flexDirection: 'row',
+                marginTop: height * 0.0248,
+                borderRadius: width * 0.06,
+                overflow: 'hidden'
+            },
+            image: {
+                width: width*0.40,
+                aspectRatio: 1,
+            },
+            contenido: {
+                flex: 1,
+                marginVertical: height*0.003
+            },
+            headerCard: {
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
+            },
+            title: {
+                textAlign: 'center',
+                marginVertical: height*0.002,
+                marginHorizontal: width*0.015,
+                fontWeight: 900,
+                fontSize: getFontSize(14.2),
+                color: '#666'
+            },
+            descripcion: {
+                paddingHorizontal: width * 0.032,
+                fontSize: getFontSize(12),
+                fontWeight: 300
+            },
+            spam:{
+                paddingVertical: height*0.008,
+                paddingHorizontal: width*0.0187,
+                fontSize: getFontSize(10.5),
+                fontWeight: 800,
+                color: '#9b9b9b',
+            },
+            footerCard: {
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginHorizontal: width*0.025
+            },
+            contentmodal: {
+                flex: 1,
+                marginTop: height*0.11,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                borderTopRightRadius: width*0.085,
+                borderTopLeftRadius: width*0.085,
+            },
+            cardmodal: {
+                backgroundColor: 'white',
+                width: Dimensions.get('screen').width*0.90,
+                borderRadius: width*0.055,
+                paddingVertical: height*0.013,
+                paddingHorizontal: width*0.025
+            },
+            buttonModal: {
+                width: width*0.85,
+                marginTop: height*0.045,
+                backgroundColor: "rgba(0,0,0,0.1)",
+                color: "rgba(0,0,0,0.6)",
+                textAlign: 'center',
+                paddingVertical: height*0.015,
+                borderRadius: width*0.028,
+                fontWeight: 'bold',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: getFontSize(14)
+            }
+        })
+    )
 
     const [isVisible, setIsVisible] = useState(false);
     
@@ -52,86 +145,3 @@ export default function Card({image, icon, title, texto, spam, iconf, modal}) {
     </>
   )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        width: width * 0.9,
-        height: width * 0.45,
-    },
-    card: {
-        backgroundColor: 'white',
-        borderWidth: 0.5,
-        borderColor: '#ccc',
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: width * 0.05,
-        borderRadius: width * 0.06,
-        overflow: 'hidden'
-    },
-    image: {
-        width: '44.5%',
-        aspectRatio: 1,
-    },
-    contenido: {
-        flex: 1,
-        marginVertical: '0.5%'
-    },
-    headerCard: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    title: {
-        textAlign: 'center',
-        marginVertical: '1%',
-        marginHorizontal: '5%',
-        fontWeight: 900,
-        fontSize: width * 0.041,
-        color: '#666'
-    },
-    descripcion: {
-        paddingHorizontal: width * 0.032,
-        fontSize: width * 0.032,
-        fontWeight: 300
-    },
-    spam:{
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        fontSize: 10,
-        fontWeight: 800,
-        color: '#9b9b9b',
-    },
-    footerCard: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 8
-    },
-    contentmodal: {
-        flex: 1,
-        marginTop: 90,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        borderTopRightRadius: 40,
-        borderTopLeftRadius: 40,
-    },
-    cardmodal: {
-        width: '90%',
-        backgroundColor: 'white',
-        width: Dimensions.get('screen').width*0.90,
-        borderRadius: 20,
-        padding: 10
-    },
-    buttonModal: {
-        width: '100%',
-        marginTop: 24,
-        backgroundColor: "rgba(0,0,0,0.1)",
-        textAlign: 'center',
-        padding: 10,
-        borderRadius: 12,
-        fontWeight: 'bold',
-        alignItems: 'center',
-    justifyContent: 'center',
-    }
-})

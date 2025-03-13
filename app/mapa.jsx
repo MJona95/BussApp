@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, useWindowDimensions, PixelRatio, Image } from "react-native";
 import Constants  from "expo-constants";
 
 import * as Animatable from 'react-native-animatable';
@@ -16,14 +16,24 @@ import PinEstacionUno from "../assets/PinEstacion1.png"
 
 import Header from '../components/Header'
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useFocusEffect } from "expo-router";
 
 import { useFetchData } from "../hooks/useFetchData";
 
+const pinSize = 90 / PixelRatio.get();
+
 export default function Mapa(){
 
-    const EXPO_PUBLIC_API_KEY_GM = Constants.expoConfig.extra.apikeym
+    const { width, height } = useWindowDimensions();
+
+    const getFontSize = (size) => {
+        const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+        const newSize = size * scale;
+        return Math.round(PixelRatio.roundToNearestPixel(newSize));
+      };
+
+    const EXPO_PUBLIC_API_KEY_GM = Constants.expoConfig.extra.apikeym;
 
     const [stations, setStations] = useState([]);
 
@@ -46,7 +56,7 @@ export default function Mapa(){
         });
     };
 
-    const data = useFetchData('stations')
+    const data = useFetchData('stations');
 
     useEffect(() => {
         
@@ -81,6 +91,48 @@ export default function Mapa(){
 
     const [selectedEstation, setSelectionEstation] = useState(null);
 
+    const styles = useMemo(
+        () => StyleSheet.create({
+            container: {
+                flex: 1,
+                zIndex: 1
+            },
+            seccionmapa: {
+                alignItems: 'center',
+                backgroundColor: 'white',
+                borderTopRightRadius: width*0.01,
+                borderTopLeftRadius: width*0.01,
+                alignItems: 'center',
+                marginTop: height * 0.02,
+                paddingTop: height*0.088,
+                height: height*1.015,
+            },
+            mapcontainer: {
+                overflow: 'hidden',
+                borderRadius: width * 0.05,
+                marginTop: height * 0.05,
+                marginBottom: height * 0.01,
+            },
+            mapa: {
+                width: width*0.95,
+                height: height*0.68,
+            },
+            destinos: {
+                flexDirection: 'row',
+            },
+            destino: {
+                backgroundColor: '#5D93D9',
+                margin: height * 0.02,
+                paddingHorizontal: width * 0.035,
+                paddingVertical: height * 0.015,
+                borderRadius: width * 0.05
+            },
+            textbutton:{
+                color: 'white',
+                fontSize: getFontSize(18),
+            }
+        })
+    )
 
     return(
         <ScrollView style={styles.container}>
@@ -111,11 +163,19 @@ export default function Mapa(){
                             <Marker
                                 onPress={() => setSelectionEstation(station)}
                                 key={index}
-                                image={station.type == "origen" ? PinOrigen : (station.type == "destino" ? PinDestino : PinEstacionUno) }
                                 coordinate={{latitude: station.latitude, longitude: station.longitude}} 
                                 onDragEnd={(direction) => setOrigin(direction.nativeEvent.coordinate)}                           
                                 >
-                                
+                                <Image
+                                    source={
+                                        station.type === "origen"
+                                        ? PinOrigen
+                                        : station.type === "destino"
+                                        ? PinDestino
+                                        : PinEstacionUno
+                                    }
+                                    style={{ width: pinSize, height: pinSize, resizeMode: 'contain' }} // Ajusta el tamaño
+                                    />
                                 </Marker>)
                         }
 
@@ -158,50 +218,3 @@ export default function Mapa(){
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        zIndex: 1
-    },
-    seccionmapa: {
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderTopRightRadius: '5%',
-        borderTopLeftRadius: '5%',
-        alignItems: 'center',
-        marginTop: '10%',
-        paddingTop: '16%',
-        height: Dimensions.get('screen').height*0.90,
-    },
-    mapcontainer: {
-        overflow: 'hidden',
-        borderRadius: 30,
-        marginTop: 15,
-        marginBottom: 5,
-    },
-    mapa: {
-        width: Dimensions.get('screen').width*0.95,
-        height: Dimensions.get('screen').height*0.61,
-    },
-    destinos: {
-        flexDirection: 'row',
-    },
-    destino: {
-        backgroundColor: '#5D93D9',
-        margin: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 12,
-        borderRadius: 20
-    },
-    textbutton:{
-        color: 'white',
-        fontSize: 18,
-    },
-    dot: {
-        width: 5,
-        height: 5,
-        borderRadius: 10,
-        backgroundColor: 'red'
-    }
-});

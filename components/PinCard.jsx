@@ -1,8 +1,76 @@
-import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Image, useWindowDimensions, PixelRatio } from "react-native";
 
-const { width, height } = Dimensions.get('window');
+import { useMemo } from "react";
 
 export default function PinCard({estacion}) {
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
+
+  const styles = useMemo(
+    () => StyleSheet.create({
+      card: {
+        backgroundColor: 'white',
+        position: 'absolute',
+        bottom: height * 0.015,
+        right: width * 0.02,
+        left: width * 0.02,
+        borderRadius: width*0.05,
+        overflow: 'hidden',
+        flexDirection: 'row',
+      },
+      image: {
+        width: width * 0.42,
+        aspectRatio: 1
+      },
+      cardInfo: {
+        paddingVertical: height * 0.007,
+        paddingHorizontal: width * 0.02,
+        flex: 1,
+        alignItems: 'center'
+      },
+      title: {
+        fontSize: getFontSize(15),
+        fontWeight: 900
+      },
+      descripcion: {
+        fontSize: getFontSize(11),
+        textAlign: 'center',
+        fontWeight: 300
+      },
+      detalles: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingTop: height * 0.004,
+        justifyContent: 'center'
+      },
+      descE:{
+        fontSize: getFontSize(10),
+        marginHorizontal: width*0.05
+      },
+      precioE: {
+        fontSize: getFontSize(10),
+        marginHorizontal: width*0.01
+      },
+      descTE:{
+        fontSize: getFontSize(9),
+        marginHorizontal: width*0.05
+      },
+      footer: {
+        marginTop: width * 0.01
+      },
+      textfooter: {
+        fontSize: width * 0.024,
+        textAlign: 'center',
+        fontWeight: 500
+      }
+  })
+  )
 
   return (
     <View style={styles.card}>
@@ -27,61 +95,3 @@ export default function PinCard({estacion}) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-    card: {
-      backgroundColor: 'white',
-      position: 'absolute',
-      bottom: height * 0.015,
-      right: width * 0.02,
-      left: width * 0.02,
-      borderRadius: 15,
-      overflow: 'hidden',
-      flexDirection: 'row',
-    },
-    image: {
-      width: width * 0.42,
-      aspectRatio: 1
-    },
-    cardInfo: {
-      paddingVertical: height * 0.007,
-      paddingHorizontal: width * 0.02,
-      flex: 1,
-      alignItems: 'center'
-    },
-    title: {
-      fontSize: width * 0.045,
-      fontWeight: 900
-    },
-    descripcion: {
-      fontSize: width * 0.028,
-      textAlign: 'center',
-      fontWeight: 300
-    },
-    detalles: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      paddingTop: height * 0.004,
-      justifyContent: 'center'
-    },
-    descE:{
-      fontSize: 10,
-      marginHorizontal: 5
-    },
-    precioE: {
-      fontSize: 10,
-      marginHorizontal: 5
-    },
-    descTE:{
-      fontSize: 9,
-      marginHorizontal: 5
-    },
-    footer: {
-      marginTop: width * 0.01
-    },
-    textfooter: {
-      fontSize: width * 0.024,
-      textAlign: 'center',
-      fontWeight: 500
-    }
-})

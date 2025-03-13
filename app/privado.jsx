@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, ScrollView, Dimensions, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, useWindowDimensions, PixelRatio, Linking, TouchableOpacity } from 'react-native';
 import Header from '../components/Header';
 import * as Animatable from 'react-native-animatable';
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect, useMemo } from 'react';
 import { useFocusEffect } from 'expo-router';
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -9,9 +9,15 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import CardAnimated from '../components/subcomponents/CardAnimated';
 import { useFetchData } from '../hooks/useFetchData';
 
-const { width, height } = Dimensions.get('window');
-
 export default function Privado() {
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
 
   const [privatetransport, setPrivateTransport] = useState([]);
 
@@ -42,6 +48,64 @@ export default function Privado() {
       const handleWeb = async () => {
         await Linking.openURL(`https://devtoolsystems.github.io/web/es/`);
     }
+
+    const styles = useMemo(
+      () => StyleSheet.create({
+        container: {
+          flex: 1,
+        },
+        containerinfo: {
+          backgroundColor: 'white',
+          borderTopLeftRadius: width*0.1,
+          borderTopRightRadius: width*0.1,
+          alignItems: 'center',
+          marginTop: height * 0.05,
+          paddingTop: height*0.075,
+          paddingBottom: height*0.125,
+        },
+        seccion: {
+          marginHorizontal: width * 0.045,
+        },
+        title: {
+          color: '#5D93D9',
+          fontSize: getFontSize(23),
+          fontWeight: 'bold',
+          paddingVertical: height * 0.03,
+          textAlign: 'center',
+        }, 
+        subtitle: {
+          fontSize: getFontSize(16),
+          color: '#888',
+          textAlign: 'center',
+          paddingBottom: height * 0.02,
+          fontWeight: 400
+        },
+        titleview: {
+          borderColor: '#666',
+          borderBottomWidth: width * 0.001,
+          borderTopWidth: width * 0.001,
+          marginVertical: height * 0.04
+        },
+        contacts: {
+          flexDirection: 'row',
+          justifyContent: 'center',
+        },
+        contact: {
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginTop: width * 0.020,
+          paddingHorizontal: width * 0.015,
+          borderWidth: 0.18,
+          borderRadius: width * 0.05,
+          marginHorizontal: width * 0.005
+        },
+        telefono: {
+          color: '#666',
+          marginHorizontal: width * 0.02,
+          fontSize: getFontSize(12.2)
+        },
+      })
+    )
 
   return (
     <View style={styles.container}>
@@ -83,59 +147,3 @@ export default function Privado() {
     </View> 
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  containerinfo: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: '6%',
-    borderTopRightRadius: '6%',
-    alignItems: 'center',
-    marginTop: height * 0.05,
-    paddingTop: '15%',
-    paddingBottom: '23%',
-  },
-  seccion: {
-    marginHorizontal: width * 0.045,
-  },
-  title: {
-    color: '#5D93D9',
-    fontSize: width * 0.06,
-    fontWeight: 'bold',
-    paddingVertical: height * 0.03,
-    textAlign: 'center',
-  }, 
-  subtitle: {
-    fontSize: width * 0.04,
-    color: '#888',
-    textAlign: 'center',
-    paddingBottom: height * 0.02,
-    fontWeight: 400
-  },
-  titleview: {
-    borderColor: '#666',
-    borderBottomWidth: width * 0.001,
-    borderTopWidth: width * 0.001,
-    marginVertical: height * 0.04
-  },
-  contacts: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  contact: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: width * 0.020,
-    paddingHorizontal: width * 0.015,
-    borderWidth: 0.18,
-    borderRadius: width * 0.05,
-    marginHorizontal: width * 0.005
-  },
-  telefono: {
-    color: '#666',
-    marginHorizontal: width * 0.02,
-    fontSize: width * 0.030
-  },
-});

@@ -1,11 +1,54 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, useWindowDimensions, PixelRatio } from 'react-native';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
 
 import CardModalIsec from './subcomponents/CardModalIsec';
 
 export default function CardModalI() {
+
+  const { width, height } = useWindowDimensions();
+
+  const getFontSize = (size) => {
+    const scale = width / 375; // 375 es el ancho de referencia del iPhone 6/7/8
+    const newSize = size * scale;
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  };
+
+  const styles = useMemo(
+    () => StyleSheet.create({
+      container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      title: { 
+        color: '#5D93D9',
+        fontWeight: 'bold',
+        fontSize: getFontSize(24),
+        marginVertical: height * 0.002,
+        textAlign: 'center'
+      },
+      informacion: {
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      informaciond: {
+        flexWrap: 'wrap',
+        alignItems: 'center',
+      },
+      titleinfo: {
+        fontSize: getFontSize(17),
+        color: '#5D93D9',
+        marginVertical: height * 0.011,
+        fontWeight: 'bold'
+      },
+      infotext: {
+        marginHorizontal: width * 0.002,
+      }
+  })
+  )
 
   const [expressbus, setExpresBus] = useState([]);
   const [regularbus, setRegularBus] = useState([]);
@@ -41,38 +84,3 @@ export default function CardModalI() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-    container: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 10
-    },
-    title: { 
-      color: '#5D93D9',
-      fontWeight: 'bold',
-      fontSize: 25,
-      margin: 5,
-      textAlign: 'center'
-    },
-    informacion: {
-      flexWrap: 'wrap',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    informaciond: {
-      flexWrap: 'wrap',
-      alignItems: 'center',
-    },
-    titleinfo: {
-      fontSize: 15,
-      color: '#5D93D9',
-      margin: 5,
-      fontWeight: 'bold'
-    },
-    infotext: {
-      marginHorizontal: 5,
-      fontSize: 12.5
-    }
-})
